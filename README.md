@@ -65,7 +65,7 @@ Todos os testes realizados com o projeto foram bem-sucedidos. O rastreador solar
     <img src="https://i.ibb.co/nfX0CNW/Imagem-23.jpg" alt="Imagem-23" style="width: 600px; height: auto;">
   </a>
 </p>
-<p align="center">Legenda da imagem: Descrição ou título da imagem.</p>
+<p align="center">Montagem no Software Proteus.</p>
    
 4. **Telegram:** Bot para saber as informações do rastreador.
 
