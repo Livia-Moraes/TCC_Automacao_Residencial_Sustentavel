@@ -69,34 +69,11 @@ Todos os testes realizados com o projeto foram bem-sucedidos. O rastreador solar
    
 3. **Telegram:** Bot para saber as informações do rastreador.
 
-<div style="text-align: center;">
-  <div style="display: inline-block; margin: 10px;">
-    <a href="https://ibb.co/k6Zy0sQ">
-      <img src="https://i.ibb.co/mFpBtV6/Imagem-26.jpg" alt="Imagem-26" style="width: 200px; height: auto;">
-    </a>
-  </div>
+⭐ Imagem 1 | ⭐ Imagem 2 | ⭐ Imagem 3 | ⭐ Imagem 4 |
+|---|---|---|---|
+![Imagem-26](https://i.ibb.co/mFpBtV6/Imagem-26.jpg) | ![Imagem-27](https://i.ibb.co/CJ3SDSB/Imagem-27.jpg) | ![Imagem-28](https://i.ibb.co/KN50684/Imagem-28.jpg) | ![Imagem-29](https://i.ibb.co/pj8fkmX/Imagem-29.jpg)
 
-  <div style="display: inline-block; margin: 10px;">
-    <a href="https://ibb.co/XyrGMGX">
-      <img src="https://i.ibb.co/CJ3SDSB/Imagem-27.jpg" alt="Imagem-27" style="width: 200px; height: auto;">
-    </a>
-  </div>
-
-  <div style="display: inline-block; margin: 10px;">
-    <a href="https://ibb.co/M8g2nJw">
-      <img src="https://i.ibb.co/KN50684/Imagem-28.jpg" alt="Imagem-28" style="width: 200px; height: auto;">
-    </a>
-  </div>
-
-  <div style="display: inline-block; margin: 10px;">
-    <a href="https://ibb.co/WvwkRTK">
-      <img src="https://i.ibb.co/pj8fkmX/Imagem-29.jpg" alt="Imagem-29" style="width: 200px; height: auto;">
-    </a>
-  </div>
-</div>
-
-<p align="center">Legenda para as imagens: Descrição geral das imagens.</p>
-
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
 
 <a id="Resultados"></a>
 ## 🏆 Resultados
