@@ -77,5 +77,8 @@ Em termos econômicos, o custo total para o desenvolvimento do protótipo foi de
 <a id="Possíveis Melhorias"></a>
 ## 💡 Possíveis Melhorias
 
+Melhorias para o Futuro:
+
+Testes Mais Extensivos: A realização de testes práticos, comparando a geração de energia com e sem o rastreador solar, ajudará a fortalecer a confiabilidade do sistema e fornecer dados concretos sobre sua eficácia.
 
 
