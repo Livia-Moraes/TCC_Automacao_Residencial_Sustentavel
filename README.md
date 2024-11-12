@@ -1,7 +1,5 @@
 # TCC - Automação Residencial Sustentável 🌱
 
-![Rastreador solar](https://ibb.co/kHDbqvd)
-
 ## 🌟 Sobre o Projeto
 
 Este projeto faz parte do Trabalho de Conclusão de Curso e visa desenvolver um sistema de automação residencial sustentável. Utilizando o ESP32 e sensores de luz, o sistema controla um painel solar para otimizar a captação de energia solar, além de monitorar e enviar dados sobre a geração de energia para uma página web, permitindo o acompanhamento em tempo real.
