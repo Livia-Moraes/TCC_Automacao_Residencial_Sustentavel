@@ -57,8 +57,9 @@ Todos os testes realizados com o projeto até agora foram bem-sucedidos. O rastr
 
 <figure align="center">
   <a href="https://ibb.co/KjMHSfc">
-    <img src="https://i.ibb.co/6R35LTc/Imagem-25.jpg" alt="Imagem-25" width="200" height="200">
+    <img src="https://i.ibb.co/6R35LTc/Imagem-25.jpg" alt="Imagem-25" width="300" height="300">
   </a>
+  
   <figure align="center"> Interface Arduino IDE</figcaption>
 </figure>
 
