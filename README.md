@@ -67,7 +67,37 @@ Todos os testes realizados com o projeto foram bem-sucedidos. O rastreador solar
 </p>
 <p align="center">Montagem no Software Proteus.</p>
    
-4. **Telegram:** Bot para saber as informações do rastreador.
+3. **Telegram:** Bot para saber as informações do rastreador.
+
+<div style="display: flex; justify-content: center; gap: 20px;">
+  <div style="text-align: center;">
+    <a href="https://ibb.co/k6Zy0sQ">
+      <img src="https://i.ibb.co/mFpBtV6/Imagem-26.jpg" alt="Imagem-26" style="width: 200px; height: auto;">
+    </a>
+    <p>Legenda da Imagem 1: Descrição ou título da imagem 1.</p>
+  </div>
+
+  <div style="text-align: center;">
+    <a href="https://ibb.co/XyrGMGX">
+      <img src="https://i.ibb.co/CJ3SDSB/Imagem-27.jpg" alt="Imagem-27" style="width: 200px; height: auto;">
+    </a>
+    <p>Legenda da Imagem 2: Descrição ou título da imagem 2.</p>
+  </div>
+
+  <div style="text-align: center;">
+    <a href="https://ibb.co/M8g2nJw">
+      <img src="https://i.ibb.co/KN50684/Imagem-28.jpg" alt="Imagem-28" style="width: 200px; height: auto;">
+    </a>
+    <p>Legenda da Imagem 3: Descrição ou título da imagem 3.</p>
+  </div>
+
+  <div style="text-align: center;">
+    <a href="https://ibb.co/WvwkRTK">
+      <img src="https://i.ibb.co/pj8fkmX/Imagem-29.jpg" alt="Imagem-29" style="width: 200px; height: auto;">
+    </a>
+    <p>Legenda da Imagem 4: Descrição ou título da imagem 4.</p>
+  </div>
+</div>
 
 <a id="Resultados"></a>
 ## 🏆 Resultados
