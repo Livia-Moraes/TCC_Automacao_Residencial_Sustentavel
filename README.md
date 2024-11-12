@@ -1,32 +1,70 @@
-# TCC - Automação Residencial Sustentável 🌱
+<p align="center">
+  <img src="URL_DA_SUA_IMAGEM" alt="Logo" width="200" height="200" />
+</p>
+
+<h1 align="center"> Rastreador Solar </h1>
+
+<a id="Sumário"></a>
 
 <p align="center">
-  <a href="#Sobre o Projeto"> 🧩 Sobre o Projeto </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#Tecnologias utilizadas"> 🚀 Tecnologias utilizadas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#Estrutura do Projeto"> 🧪 Dependências</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#Resultados"> 🏆 Resultados </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#Possíveis Melhorias"> 💡Possíveis Melhorias </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b> Rastreador Solar Automatizado para Monitoramento de Energia </b></br>
+  <sub> Este projeto busca automatizar a movimentação de um painel solar para captar a maior quantidade de luz solar possível.
+  <sub>
 </p>
- 
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
+
+<p align="center">
+  <a href="#Introdução"> 🧩 Introdução </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#Resultados"> 🚀 Resultados</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#Dependências"> 🧪 Dependências</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#Ideias">💡 Possíveis Melhorias </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#Creditos"> 🏆 Créditos </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+
 <br/>
 
-## 🌟 Sobre o Projeto
+### 🚧 PROJETO EM ANDAMENTO 🚧
 
-Este projeto faz parte do Trabalho de Conclusão de Curso e visa desenvolver um sistema de automação residencial sustentável. Utilizando o ESP32 e sensores de luz, o sistema controla um painel solar para otimizar a captação de energia solar, além de monitorar e enviar dados sobre a geração de energia para uma página web, permitindo o acompanhamento em tempo real.
+<br/>
 
-## 🔧 Tecnologias Utilizadas
+<a id="Introdução"></a>
+## 🧩 Introdução 
 
-- **ESP32:** Microcontrolador para controlar e monitorar o rastreador solar.
-- **LDRs (Light Dependent Resistors):** Sensores de luz para detectar a posição do sol.
-- **Servos:** Motores que ajustam a posição do painel solar.
-- **Wi-Fi:** Conexão com a internet para enviar dados para o bot no telegram.
-- **Plataformas e Ferramentas:** Arduino IDE, Proteus (para simulação).
+Bem-vindo ao meu projeto de rastreador solar! Este sistema utiliza o ESP32 para controlar a movimentação de um painel solar, ajustando sua posição ao longo do dia com base na luminosidade captada por sensores LDR, permitindo maximizar a eficiência na captação de energia solar.
 
-## 📐 Estrutura do Projeto
+<br/>
 
-1. **Código para o ESP32:** Lógica de controle do rastreamento solar e comunicação com o telegram.
-2. **Circuito Eletrônico:** Montagem do circuito com ESP32, LDRs e servos.
-3. **Telegram:** Bot para saber as informações do rastreador.
+<a id="Resultados"></a>
+## 🚀 Resultados 
+
+Todos os testes realizados com o projeto até agora foram bem-sucedidos. O rastreador solar ajusta a posição do painel com base na intensidade da luz detectada pelos sensores LDR.
+
+### Exemplo de Funcionamento:
+
+- **LDRs**: São utilizados para detectar a direção do sol (Norte, Sul, Leste, Oeste).
+- **Servos Motores**: Movimentam o painel de acordo com as leituras dos LDRs.
+- **Gráficos**: O ESP32 envia os dados de energia gerada para uma página da web, exibindo gráficos.
+
+<br/>
+
+<a id="Dependências"></a>
+## 🧪 Dependências
+
+> Requisitos para rodar o código:
+
+- **ESP32**: Para controle dos sensores e servos.
+- **LDR (Light Dependent Resistor)**: Sensores de luminosidade.
+- **Servos Motores**: Para movimentação do painel solar.
+- **Fonte de Alimentação**: Para alimentar o sistema.
+
+### 📖 Instalação
+
+Para rodar o projeto, clone o repositório e instale as dependências necessárias.
+
+```bash
+git clone https://github.com/seu-usuario/rastreador-solar.git
+
 
 
 
