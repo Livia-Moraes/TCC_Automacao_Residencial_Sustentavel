@@ -67,16 +67,12 @@ Todos os testes realizados com o projeto foram bem-sucedidos. O rastreador solar
 </p>
 <p align="center">Montagem no Software Proteus.</p>
    
-3. **Telegram:** Bot para saber as informações do rastreador.
-
- ⭐ Comando Start|⭐ Comando Ambos |⭐ Comando Informações |⭐ Comandos |
-|---|---|---|---|
-![Imagem-26](https://i.ibb.co/mFpBtV6/Imagem-26.jpg) | ![Imagem-27](https://i.ibb.co/CJ3SDSB/Imagem-27.jpg) | ![Imagem-28](https://i.ibb.co/KN50684/Imagem-28.jpg) | ![Imagem-29](https://i.ibb.co/pj8fkmX/Imagem-29.jpg)
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
-
 <a id="Resultados"></a>
 ## 🏆 Resultados
+
+O protótipo de rastreador solar foi desenvolvido com o objetivo de ser de fácil manuseio, utilizando uma mini placa fotovoltaica como elemento ilustrativo e controlado pelo microcontrolador ESP32. O sistema foi projetado para ajustar o movimento do rastreador com base na leitura dos sensores de luminosidade (LDR) posicionados nos pontos cardeais. A montagem do protótipo foi concluída com mais de 80% de eficiência, atingindo os resultados esperados. Durante os testes, realizados em diversas intensidades de luz, o sistema se mostrou eficiente, sendo capaz de ajustar sua posição de acordo com a radiação solar de forma precisa. Embora não tenha sido realizada uma comparação com um painel fixo, os resultados mostraram que o rastreador solar cumpriu sua função de maneira satisfatória. Além disso, a interação com o Telegram foi validada, permitindo que o bot fornecesse informações sobre a intensidade de luz de cada LDR, sendo uma ferramenta útil para a comunicação entre o usuário e o sistema.
+
+Em termos econômicos, o custo total para o desenvolvimento do protótipo foi de R$ 200,46, com as principais despesas distribuídas entre o ESP32, micro servos motores, LDRs, a mini placa fotovoltaica e outros componentes como jumpers e resistores. Contudo, se o sistema fosse implementado em um painel solar em operação, o custo aumentaria consideravelmente, já que seria necessário utilizar equipamentos mais robustos e de maior capacidade de geração de energia, além de outros requisitos específicos.
 
 <a id="Possíveis Melhorias"></a>
 ## 💡 Possíveis Melhorias
