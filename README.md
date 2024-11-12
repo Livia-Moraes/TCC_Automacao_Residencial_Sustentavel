@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://i.ibb.co/qygqmVZ/Imagem-24.jpg" alt="Imagem-24" width="300" height="300" />
-</p>
-
 <h1 align="center"> TCC - Automação Residencial Sustentável </h1>
 
 <a id="Sumário"></a>
