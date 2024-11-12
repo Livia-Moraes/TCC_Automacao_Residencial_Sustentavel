@@ -29,7 +29,9 @@
 <a id="Sobre o Projeto"></a>
 ## 🧩 Sobre o Projeto 
 
-Bem-vindo ao meu projeto de rastreador solar! Este sistema utiliza o ESP32 para controlar a movimentação de um painel solar, ajustando sua posição ao longo do dia com base na luminosidade captada por sensores LDR, permitindo maximizar a eficiência na captação de energia solar.
+Bem-vindo ao meu projeto de rastreador solar! 
+
+Este projeto faz parte do Trabalho de Conclusão de Curso e visa desenvolver um sistema de automação residencial sustentável. Utilizando o ESP32, sensores de luz e servos motores para controlar uma estrutura que terá um painel solar para otimizar a captação de energia solar, além de monitorar e enviar dados sobre a geração de energia via bot no telegram, permitindo o acompanhamento em tempo real.
 
 <br/>
 
@@ -40,15 +42,26 @@ Todos os testes realizados com o projeto até agora foram bem-sucedidos. O rastr
 
 ### Exemplo de Funcionamento:
 
-- **LDRs**: São utilizados para detectar a direção do sol (Norte, Sul, Leste, Oeste).
-- **Servos Motores**: Movimentam o painel de acordo com as leituras dos LDRs.
-- **Gráficos**: O ESP32 envia os dados de energia gerada para uma página da web, exibindo gráficos.
+- **ESP32:** Microcontrolador para controlar e monitorar o rastreador solar.
+- **LDRs (Light Dependent Resistors):** Sensores de luz para detectar a posição do sol.
+- **Servos:** Motores que ajustam a posição do painel solar.
+- **Wi-Fi:** Conexão com a internet para enviar dados para o bot no telegram.
+- **Plataformas e Ferramentas:** Arduino IDE (para programação), Proteus (para simulação), Telegram (Envio de dados).
 
 <br/>
 
 <a id="Estrutura do Projeto"></a>
 ## 🧪 Estrutura do Projeto
 
+1. **Código para o ESP32:** Lógica de controle do rastreamento solar e comunicação com o telegram.
+
+   <figure align="center">
+  <img src="<a href="https://ibb.co/KjMHSfc"><img src="https://i.ibb.co/6R35LTc/Imagem-25.jpg" alt="Imagem-25" border="0"></a>" alt="Imagem-24" width="400" height="400" />
+  <figcaption>Legenda da imagem: Interface Arduino IDE.</figcaption>
+</figure>
+
+2. **Circuito Eletrônico:** Montagem do circuito com ESP32, LDRs e servos.
+3. **Telegram:** Bot para saber as informações do rastreador.
 
 <a id="Resultados"></a>
 ## 🏆 Resultados
