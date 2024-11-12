@@ -34,11 +34,11 @@ Este projeto faz parte do Trabalho de Conclusão de Curso e visa desenvolver um 
 <a id="Tecnologias utilizadas"></a>
 ## 🚀 Tecnologias utilizadas 
 
-Todos os testes realizados com o projeto até agora foram bem-sucedidos. O rastreador solar ajusta a posição do painel com base na intensidade da luz detectada pelos sensores LDR.
+Todos os testes realizados com o projeto foram bem-sucedidos. O rastreador solar ajusta a posição do painel com base na intensidade da luz detectada pelos sensores LDR.
 
 ### Exemplo de Funcionamento:
 
-- **ESP32:** Microcontrolador para controlar e monitorar o rastreador solar.
+- **ESP32:** O microcontrolador controla e monitora o rastreador solar.
 - **LDRs (Light Dependent Resistors):** Sensores de luz para detectar a posição do sol.
 - **Servos:** Motores que ajustam a posição do painel solar.
 - **Wi-Fi:** Conexão com a internet para enviar dados para o bot no telegram.
@@ -59,7 +59,15 @@ Todos os testes realizados com o projeto até agora foram bem-sucedidos. O rastr
 </figure>
 
 2. **Circuito Eletrônico:** Montagem do circuito com ESP32, LDRs e servos.
-3. **Telegram:** Bot para saber as informações do rastreador.
+
+<p align="center">
+  <a href="https://ibb.co/2Pz6N1b">
+    <img src="https://i.ibb.co/nfX0CNW/Imagem-23.jpg" alt="Imagem-23" style="width: 600px; height: auto;">
+  </a>
+  <p align="center"> Montagem Proteus </figcaption>
+</figure>
+   
+4. **Telegram:** Bot para saber as informações do rastreador.
 
 <a id="Resultados"></a>
 ## 🏆 Resultados
