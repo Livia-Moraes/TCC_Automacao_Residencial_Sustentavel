@@ -1,1 +1,154 @@
+#include <ESP32Servo.h>        // Inclui a biblioteca para controle de servos no ESP32
+#include <Arduino.h>           // Inclui a biblioteca principal do Arduino para funcionalidades básicas
+#include <WiFi.h>              // Inclui a biblioteca para controle de Wi-Fi
+#include <UniversalTelegramBot.h> // Inclui a biblioteca para comunicação com o Telegram
+#include <WiFiClientSecure.h>  // Inclui a biblioteca para conexões Wi-Fi seguras
+
+// Dados Wi-Fi
+const char* ssid = "Livia";    // Define o nome da rede Wi-Fi (SSID)
+const char* password = "Flamengo2019"; // Define a senha da rede Wi-Fi
+
+// Dados do bot
+const char* telegramToken = "7611180026:AAH4S1qSRjmUgW4i4qF01-LW7ftWeAfyDfo"; // Token do bot do Telegram
+
+const int ldrNortePin = 34;   // Define o pino analógico para o LDR norte
+const int ldrSulPin = 35;     // Define o pino analógico para o LDR sul
+const int ldrLestePin = 32;   // Define o pino analógico para o LDR leste
+const int ldrOestePin = 33;   // Define o pino analógico para o LDR oeste
+const int limiar = 1000;   // Valor mínimo para detectar luz suficiente
+const int neutrolimiar = 500; // Valor para posição neutra
+
+Servo servoNS;                // Cria o objeto do servo Norte-Sul
+Servo servoLO;                // Cria o objeto do servo Leste-Oeste
+
+int posicaoAtualNS = 90;      // Posição inicial para o servo Norte-Sul
+int posicaoAtualLO = 90;      // Posição inicial para o servo Leste-Oeste
+
+// Configurações do Telegram
+WiFiClientSecure client;      // Cria o cliente Wi-Fi seguro
+UniversalTelegramBot bot(telegramToken, client); // Inicializa o bot com o token e cliente
+unsigned long bot_lasttime = 0; // Variável para armazenar o último tempo de atualização do bot
+const int botRequestDelay = 1000;  // Atraso entre solicitações do bot (em milissegundos)
+
+void setup() {
+  Serial.begin(9600);          // Inicia a comunicação serial a 9600 bps
+
+  // Configurações de Wi-Fi
+  WiFi.begin(ssid, password);  // Conecta ao Wi-Fi com o SSID e senha definidos
+  while (WiFi.status() != WL_CONNECTED) { // Espera até estar conectado
+    delay(500);
+    Serial.print(".");         // Imprime "." enquanto tenta se conectar
+  }
+  Serial.println("Conectado ao WiFi"); // Informa conexão estabelecida
+
+  // Configuração para ignorar a verificação do certificado SSL
+  client.setInsecure();        // Desativa a verificação de certificado para conexões SSL
+
+  // Configurações dos servos
+  servoNS.attach(14);          // Conecta o servo Norte-Sul ao pino GPIO14
+  servoLO.attach(12);          // Conecta o servo Leste-Oeste ao pino GPIO12
+
+  // Define as posições iniciais dos servos
+  servoNS.write(posicaoAtualNS);  
+  servoLO.write(posicaoAtualLO);
+  delay(3000);                 // Aguarda 3 segundos para estabilização
+}
+
+// Função para mover o servo lentamente até a posição final
+void moverServoLento(Servo &servo, int &posicaoAtual, int posicaoFinal) {
+  if (posicaoAtual != posicaoFinal) { // Verifica se a posição final é diferente da atual
+    if (posicaoAtual < posicaoFinal) { // Movimento crescente
+      for (int pos = posicaoAtual; pos <= posicaoFinal; pos++) {
+        servo.write(pos);        // Ajusta o servo na posição
+        delay(20);               // Aguarda 20 ms entre movimentos
+      }
+    } else {                     // Movimento decrescente
+      for (int pos = posicaoAtual; pos >= posicaoFinal; pos--) {
+        servo.write(pos);
+        delay(20);  
+      }
+    }
+    posicaoAtual = posicaoFinal; // Atualiza a posição atual
+  }
+}
+
+// Função para lidar com novas mensagens
+void handleNewMessages(int numNewMessages) {
+  for (int i = 0; i < numNewMessages; i++) { // Percorre todas as novas mensagens recebidas
+    String chat_id = String(bot.messages[i].chat_id); // Armazena o ID do chat
+    String text = bot.messages[i].text; // Armazena o texto da mensagem
+
+    String resposta;
+    if (text == "/start") {
+      resposta = "Bem-vindo! Use /ajuda para ver os comandos disponíveis.";
+    } else if (text == "/informacao") {
+      resposta = "Informações sobre o rastreador solar e eficiência energética.";
+    } else if (text == "/porcentagem_norte") {
+      int ldrNorteValue = analogRead(ldrNortePin);
+      resposta = "Porcentagem Norte: " + String((ldrNorteValue * 100) / 4095) + "%";
+    } else if (text == "/porcentagem_sul") {
+      int ldrSulValue = analogRead(ldrSulPin);
+      resposta = "Porcentagem Sul: " + String((ldrSulValue * 100) / 4095) + "%";
+    } else if (text == "/porcentagem_leste") {
+      int ldrLesteValue = analogRead(ldrLestePin);
+      resposta = "Porcentagem Leste: " + String((ldrLesteValue * 100) / 4095) + "%";
+    } else if (text == "/porcentagem_oeste") {
+      int ldrOesteValue = analogRead(ldrOestePin);
+      resposta = "Porcentagem Oeste: " + String((ldrOesteValue * 100) / 4095) + "%";
+    } else if (text == "/ambos") {
+      int ldrNorteValue = analogRead(ldrNortePin);
+      int ldrSulValue = analogRead(ldrSulPin);
+      int ldrLesteValue = analogRead(ldrLestePin);
+      int ldrOesteValue = analogRead(ldrOestePin);
+      resposta = "Porcentagens: Norte, Sul, Leste e Oeste.";
+    } else if (text == "/ajuda") {
+      resposta = "Comandos disponíveis: /start, /informacao, /status, etc.";
+    } else {
+      resposta = "Comando não reconhecido.";
+    }
+
+    bot.sendMessage(chat_id, resposta, ""); // Envia a resposta pelo bot
+  }
+}
+
+void loop() {
+  // Leitura dos valores dos LDRs e controle dos servos
+  int ldrNorteValue = analogRead(ldrNortePin); // Lê o LDR Norte
+  int ldrSulValue = analogRead(ldrSulPin);     // Lê o LDR Sul
+  int ldrLesteValue = analogRead(ldrLestePin); // Lê o LDR Leste
+  int ldrOesteValue = analogRead(ldrOestePin); // Lê o LDR Oeste
+
+  // Controle do servo com base nos valores dos LDRs
+  if (ldrNorteValue > limiar && ldrNorteValue > ldrSulValue) {
+    Serial.println("Luz detectada no Norte");
+    moverServoLento(servoNS, posicaoAtualNS, 40); // Posição para norte
+  } else if (ldrSulValue > limiar && ldrSulValue > ldrNorteValue) {
+    Serial.println("Luz detectada no Sul");
+    moverServoLento(servoNS, posicaoAtualNS, 180); // Posição para sul
+  } else if (ldrNorteValue < neutrolimiar && ldrSulValue < neutrolimiar) {
+    Serial.println("Luz insuficiente - posição neutra");
+    moverServoLento(servoNS, posicaoAtualNS, 90); // Posição neutra
+  }
+
+  // Controle do servo Leste-Oeste
+  if (ldrLesteValue > limiar && ldrLesteValue > ldrOesteValue) {
+    moverServoLento(servoLO, posicaoAtualLO, 0); // Posição leste
+  } else if (ldrOesteValue > limiar && ldrOesteValue > ldrLesteValue) {
+    moverServoLento(servoLO, posicaoAtualLO, 180); // Posição oeste
+  } else {
+    moverServoLento(servoLO, posicaoAtualLO, 90); // Posição neutra
+  }
+
+  // Atualização do Telegram em intervalos
+  if (millis() > bot_lasttime + botRequestDelay) {
+    int numNewMessages = bot.getUpdates(bot.last_message_received + 1); // Verifica novas mensagens
+    while(numNewMessages) {          // Processa as mensagens
+      handleNewMessages(numNewMessages);
+      numNewMessages = bot.getUpdates(bot.last_message_received + 1);
+    }
+    bot_lasttime = millis();        // Atualiza o tempo da última verificação
+  }
+
+  delay(500); // Atraso para estabilidade
+}
 
