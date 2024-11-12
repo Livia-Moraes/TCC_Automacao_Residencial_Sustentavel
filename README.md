@@ -59,7 +59,7 @@ Todos os testes realizados com o projeto até agora foram bem-sucedidos. O rastr
   <a href="https://ibb.co/KjMHSfc">
     <img src="https://i.ibb.co/6R35LTc/Imagem-25.jpg" alt="Imagem-25" style="width: 600px; height: auto;">
   </a>
-  <h1 align="center">Interface Arduino IDE.</figcaption>
+  <p align="center">Interface Arduino IDE.</figcaption>
 </figure>
 
 2. **Circuito Eletrônico:** Montagem do circuito com ESP32, LDRs e servos.
