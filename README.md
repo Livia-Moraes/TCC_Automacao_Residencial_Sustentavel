@@ -2,12 +2,12 @@
   <img src="https://i.ibb.co/qygqmVZ/Imagem-24.jpg" alt="Imagem-24" width="300" height="300" />
 </p>
 
-<h1 align="center"> Rastreador Solar </h1>
+<h1 align="center"> TCC - Automação Residencial Sustentável </h1>
 
 <a id="Sumário"></a>
 
 <p align="center">
-  <b> TCC - Automação Residencial Sustentável </b></br>
+  <b> Rastreador Solar </b></br>
   <sub> Este projeto busca automatizar a movimentação de um painel solar para captar a maior quantidade de luz solar possível e tornar mais eficiênte a geração.
   <sub>
 </p>
