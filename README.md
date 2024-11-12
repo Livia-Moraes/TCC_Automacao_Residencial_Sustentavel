@@ -1,18 +1,18 @@
 # TCC - Automação Residencial Sustentável 🌱
 
-## 🌟 Sobre o Projeto
-
-Este projeto faz parte do Trabalho de Conclusão de Curso e visa desenvolver um sistema de automação residencial sustentável. Utilizando o ESP32 e sensores de luz, o sistema controla um painel solar para otimizar a captação de energia solar, além de monitorar e enviar dados sobre a geração de energia para uma página web, permitindo o acompanhamento em tempo real.
-
 <p align="center">
   <a href="#Sobre o Projeto"> 🧩 Sobre o Projeto </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#Tecnologias utilizadas"> 🚀 Tecnologias utilizadas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#Estrutura do Projeto"> 🧪 Dependências</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#Resultados"> 🏆 Possíveis Melhorias </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#Resultados"> 🏆 Resultados </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#Possíveis Melhorias"> 💡Possíveis Melhorias </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
  
 <br/>
+
+## 🌟 Sobre o Projeto
+
+Este projeto faz parte do Trabalho de Conclusão de Curso e visa desenvolver um sistema de automação residencial sustentável. Utilizando o ESP32 e sensores de luz, o sistema controla um painel solar para otimizar a captação de energia solar, além de monitorar e enviar dados sobre a geração de energia para uma página web, permitindo o acompanhamento em tempo real.
 
 ## 🔧 Tecnologias Utilizadas
 
