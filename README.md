@@ -74,28 +74,28 @@ Todos os testes realizados com o projeto foram bem-sucedidos. O rastreador solar
     <a href="https://ibb.co/k6Zy0sQ">
       <img src="https://i.ibb.co/mFpBtV6/Imagem-26.jpg" alt="Imagem-26" style="width: 200px; height: auto;">
     </a>
-    <p>Legenda da Imagem 1: Descrição ou título da imagem 1.</p>
+    <p>Comando start- via telegram.</p>
   </div>
 
   <div style="text-align: center;">
     <a href="https://ibb.co/XyrGMGX">
       <img src="https://i.ibb.co/CJ3SDSB/Imagem-27.jpg" alt="Imagem-27" style="width: 200px; height: auto;">
     </a>
-    <p>Legenda da Imagem 2: Descrição ou título da imagem 2.</p>
+    <p>Comando ambos- via telegram.</p>
   </div>
 
   <div style="text-align: center;">
     <a href="https://ibb.co/M8g2nJw">
       <img src="https://i.ibb.co/KN50684/Imagem-28.jpg" alt="Imagem-28" style="width: 200px; height: auto;">
     </a>
-    <p>Legenda da Imagem 3: Descrição ou título da imagem 3.</p>
+    <p>Comando informacao- via telegram.</p>
   </div>
 
   <div style="text-align: center;">
     <a href="https://ibb.co/WvwkRTK">
       <img src="https://i.ibb.co/pj8fkmX/Imagem-29.jpg" alt="Imagem-29" style="width: 200px; height: auto;">
     </a>
-    <p>Legenda da Imagem 4: Descrição ou título da imagem 4.</p>
+    <p>Comandos - via telegram.</p>
   </div>
 </div>
 
