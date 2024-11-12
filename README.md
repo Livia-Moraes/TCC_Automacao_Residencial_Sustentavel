@@ -16,7 +16,7 @@
   <a href="#Estrutura do Projeto"> 🧪 Estrutura do Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#Resultados"> 🏆 Resultados </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#Possíveis Melhorias"> 💡 Possíveis Melhorias </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#Código"> 📄 Código </a>"https://github.com/Livia922-eng/TCC_Automacao_Residencial_Sustentavel/blob/main/C%C3%B3digo;
+  <a href="https://github.com/Livia922-eng/TCC_Automacao_Residencial_Sustentavel/blob/main/C%C3%B3digo"> 📄 Código </a>
 </p>
 
 <br/>
