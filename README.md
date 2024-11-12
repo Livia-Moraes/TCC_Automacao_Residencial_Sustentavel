@@ -69,7 +69,7 @@ Todos os testes realizados com o projeto foram bem-sucedidos. O rastreador solar
    
 3. **Telegram:** Bot para saber as informações do rastreador.
 
-⭐ Imagem 1 | ⭐ Imagem 2 | ⭐ Imagem 3 | ⭐ Imagem 4 |
+ Start| Ambos | Informações | Comandos |
 |---|---|---|---|
 ![Imagem-26](https://i.ibb.co/mFpBtV6/Imagem-26.jpg) | ![Imagem-27](https://i.ibb.co/CJ3SDSB/Imagem-27.jpg) | ![Imagem-28](https://i.ibb.co/KN50684/Imagem-28.jpg) | ![Imagem-29](https://i.ibb.co/pj8fkmX/Imagem-29.jpg)
 
