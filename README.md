@@ -24,8 +24,6 @@
 
 <br/>
 
-PROJETO CONCLUÍDO
-
 <br/>
 
 <a id="Sobre o Projeto"></a>
