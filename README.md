@@ -18,12 +18,5 @@ Este projeto faz parte do Trabalho de Conclusão de Curso e visa desenvolver um 
 2. **Circuito Eletrônico:** Montagem do circuito com ESP32, LDRs e servos.
 3. **Telegram:** Bot para saber as informações do rastreador.
 
-## 📷 Imagens do Projeto
 
-## 🚀 Como Usar
-
-1. **Clone o repositório:**
-
-   ```bash
-   git clone https://github.com/SeuUsuario/TCC_Automacao_Residencial_Sustentavel.git
 
