@@ -7,8 +7,8 @@
 <a id="Sumário"></a>
 
 <p align="center">
-  <b> Rastreador Solar Automatizado para Monitoramento de Energia </b></br>
-  <sub> Este projeto busca automatizar a movimentação de um painel solar para captar a maior quantidade de luz solar possível.
+  <b> Rastreador Solar Automatizado para Monitoramento e controlar de Energia </b></br>
+  <sub> Este projeto busca automatizar a movimentação de um painel solar para captar a maior quantidade de luz solar possível e tornar mais eficiênte a geração.
   <sub>
 </p>
 
