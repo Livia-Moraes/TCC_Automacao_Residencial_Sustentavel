@@ -55,12 +55,11 @@ Todos os testes realizados com o projeto até agora foram bem-sucedidos. O rastr
 
 1. **Código para o ESP32:** Lógica de controle do rastreamento solar e comunicação com o telegram.
 
-<figure align="center">
+<figure style="text-align: center;">
   <a href="https://ibb.co/KjMHSfc">
-    <img src="https://i.ibb.co/6R35LTc/Imagem-25.jpg" alt="Imagem-25" width="300" height="300">
+    <img src="https://i.ibb.co/6R35LTc/Imagem-25.jpg" alt="Imagem-25" style="width: 600px; height: auto;">
   </a>
-  
-  <figure align="center"> Interface Arduino IDE</figcaption>
+  <figcaption>Legenda da imagem: Descrição ou título da imagem.</figcaption>
 </figure>
 
 2. **Circuito Eletrônico:** Montagem do circuito com ESP32, LDRs e servos.
