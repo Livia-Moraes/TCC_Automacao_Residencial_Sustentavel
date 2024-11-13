@@ -1,88 +1,91 @@
-#include <ESP32Servo.h>        // Inclui a biblioteca para controle de servos no ESP32
-#include <Arduino.h>           // Inclui a biblioteca principal do Arduino para funcionalidades básicas
-#include <WiFi.h>              // Inclui a biblioteca para controle de Wi-Fi
-#include <UniversalTelegramBot.h> // Inclui a biblioteca para comunicação com o Telegram
-#include <WiFiClientSecure.h>  // Inclui a biblioteca para conexões Wi-Fi seguras
+#include <ESP32Servo.h>        // Includes the library for controlling servos on the ESP32
+#include <Arduino.h>           // Includes the main Arduino library for basic functionalities
+#include <WiFi.h>              // Includes the library for Wi-Fi control
+#include <UniversalTelegramBot.h> // Includes the library for communication with Telegram
+#include <WiFiClientSecure.h>  // Includes the library for secure Wi-Fi connections
 
-// Dados Wi-Fi
-const char* ssid = "Livia";    // Define o nome da rede Wi-Fi (SSID)
-const char* password = "Flamengo2019"; // Define a senha da rede Wi-Fi
+// Wi-Fi Data
+const char* ssid = "Livia";    // Defines the name of the Wi-Fi network (SSID)
+const char* password = "Flamengo2019"; // Defines the password for the Wi-Fi network
 
-// Dados do bot
-const char* telegramToken = "7611180026:AAH4S1qSRjmUgW4i4qF01-LW7ftWeAfyDfo"; // Token do bot do Telegram
+// Bot Data
+const char* telegramToken = "7611180026:AAH4S1qSRjmUgW4i4qF01-LW7ftWeAfyDfo"; // Telegram bot token
 
-const int ldrNortePin = 34;   // Define o pino analógico para o LDR norte
-const int ldrSulPin = 35;     // Define o pino analógico para o LDR sul
-const int ldrLestePin = 32;   // Define o pino analógico para o LDR leste
-const int ldrOestePin = 33;   // Define o pino analógico para o LDR oeste
-const int limiar = 1000;   // Valor mínimo para detectar luz suficiente
-const int neutrolimiar = 500; // Valor para posição neutra
+const int ldrNortePin = 34;   // Defines the analog pin for the North LDR
+const int ldrSulPin = 35;     // Defines the analog pin for the South LDR
+const int ldrLestePin = 32;   // Defines the analog pin for the East LDR
+const int ldrOestePin = 33;   // Defines the analog pin for the West LDR
+const int limiar = 1000;   // Minimum value to detect sufficient light
+const int neutrolimiar = 500; // Value for the neutral position
 
-Servo servoNS;                // Cria o objeto do servo Norte-Sul
-Servo servoLO;                // Cria o objeto do servo Leste-Oeste
+Servo servoNS;                // Creates the North-South servo object
+Servo servoLO;                // Creates the East-West servo object
 
-int posicaoAtualNS = 90;      // Posição inicial para o servo Norte-Sul
-int posicaoAtualLO = 90;      // Posição inicial para o servo Leste-Oeste
+int posicaoAtualNS = 90;      // Initial position for the North-South servo
+int posicaoAtualLO = 90;      // Initial position for the East-West servo
 
-// Configurações do Telegram
-WiFiClientSecure client;      // Cria o cliente Wi-Fi seguro
-UniversalTelegramBot bot(telegramToken, client); // Inicializa o bot com o token e cliente
-unsigned long bot_lasttime = 0; // Variável para armazenar o último tempo de atualização do bot
-const int botRequestDelay = 1000;  // Atraso entre solicitações do bot (em milissegundos)
+// Telegram Configuration
+WiFiClientSecure client;      // Creates the secure Wi-Fi client
+UniversalTelegramBot bot(telegramToken, client); // Initializes the bot with the token and client
+unsigned long bot_lasttime = 0; // Variable to store the last update time of the bot
+const int botRequestDelay = 1000;  // Delay between bot requests (in milliseconds)
 
 void setup() {
-  Serial.begin(9600);          // Inicia a comunicação serial a 9600 bps
+  Serial.begin(9600);          // Starts serial communication at 9600 baud rate
 
-  // Configurações de Wi-Fi
-  WiFi.begin(ssid, password);  // Conecta ao Wi-Fi com o SSID e senha definidos
-  while (WiFi.status() != WL_CONNECTED) { // Espera até estar conectado
+  // Wi-Fi Configuration
+  WiFi.begin(ssid, password);  // Connects to the Wi-Fi with the defined SSID and password
+  while (WiFi.status() != WL_CONNECTED) { // Wait until connected
     delay(500);
-    Serial.print(".");         // Imprime "." enquanto tenta se conectar
+    Serial.print(".");         // Prints "." while trying to connect
   }
-  Serial.println("Conectado ao WiFi"); // Informa conexão estabelecida
+  Serial.println("Conectado ao WiFi"); // Informs that the connection is established
 
-  // Configuração para ignorar a verificação do certificado SSL
-  client.setInsecure();        // Desativa a verificação de certificado para conexões SSL
+  // Configures SSL certificate check bypass
+  client.setInsecure();        // Disables certificate verification for SSL connections
 
-  // Configurações dos servos
-  servoNS.attach(14);          // Conecta o servo Norte-Sul ao pino GPIO14
-  servoLO.attach(12);          // Conecta o servo Leste-Oeste ao pino GPIO12
+  // Servo Configuration
+  servoNS.attach(14);          // Connects the North-South servo to GPIO14
+  servoLO.attach(12);          // Connects the East-West servo to GPIO12
 
-  // Define as posições iniciais dos servos
+  // Sets initial positions of the servos
   servoNS.write(posicaoAtualNS);  
   servoLO.write(posicaoAtualLO);
-  delay(3000);                 // Aguarda 3 segundos para estabilização
+  delay(3000);                 // Waits 3 seconds for stabilization
 }
 
-// Função para mover o servo lentamente até a posição final
+// Function to move the servo slowly to the final position
 void moverServoLento(Servo &servo, int &posicaoAtual, int posicaoFinal) {
-  if (posicaoAtual != posicaoFinal) { // Verifica se a posição final é diferente da atual
-    if (posicaoAtual < posicaoFinal) { // Movimento crescente
+  if (posicaoAtual != posicaoFinal) { // Checks if the final position is different from the current one
+    if (posicaoAtual < posicaoFinal) { // For increasing movement
       for (int pos = posicaoAtual; pos <= posicaoFinal; pos++) {
-        servo.write(pos);        // Ajusta o servo na posição
-        delay(20);               // Aguarda 20 ms entre movimentos
+        servo.write(pos);        // Adjusts the servo to the position
+        delay(20);               // Waits 20 ms between movements
       }
-    } else {                     // Movimento decrescente
+    } else {                     // For decreasing movement
       for (int pos = posicaoAtual; pos >= posicaoFinal; pos--) {
         servo.write(pos);
         delay(20);  
       }
     }
-    posicaoAtual = posicaoFinal; // Atualiza a posição atual
+    posicaoAtual = posicaoFinal; // Updates the current position
   }
 }
 
-// Função para lidar com novas mensagens
+// Function to handle new messages
 void handleNewMessages(int numNewMessages) {
-  for (int i = 0; i < numNewMessages; i++) { // Percorre todas as novas mensagens recebidas
-    String chat_id = String(bot.messages[i].chat_id); // Armazena o ID do chat
-    String text = bot.messages[i].text; // Armazena o texto da mensagem
+  for (int i = 0; i < numNewMessages; i++) { // Loops through all new received messages
+    String chat_id = String(bot.messages[i].chat_id); // Stores the chat ID
+    String text = bot.messages[i].text; // Stores the message text
 
     String resposta;
     if (text == "/start") {
       resposta = "Bem-vindo! Use /ajuda para ver os comandos disponíveis.";
     } else if (text == "/informacao") {
-      resposta = "Informações sobre o rastreador solar e eficiência energética.";
+      resposta = "O rastreador solar foi projetado pensando na melhora da eficiência energética da geração de energia, com as posições do painel sendo ajustadas de acordo com a intensidade da luz solar no sensor de luminosidade.\n"
+           "Para que seja possível ter mais autonomia na sua geração, você pode calcular a quantidade de energia gerada por um painel usando a fórmula: (Energia (kWh) = Potência do Painel (kW) * Irradiação Solar (kWh/m².dia) * Eficiência * Dias).\n"
+           "A irradiação solar varia de acordo com cada região e isso deve ser levado em conta. Para mais informações detalhadas sobre como fazer esse cálculo, consulte: https://blog.solfacil.com.br/energia-solar/como-calcular-a-energia-gerada-por-um-painel-solar/";
+
     } else if (text == "/porcentagem_norte") {
       int ldrNorteValue = analogRead(ldrNortePin);
       resposta = "Porcentagem Norte: " + String((ldrNorteValue * 100) / 4095) + "%";
@@ -100,55 +103,67 @@ void handleNewMessages(int numNewMessages) {
       int ldrSulValue = analogRead(ldrSulPin);
       int ldrLesteValue = analogRead(ldrLestePin);
       int ldrOesteValue = analogRead(ldrOestePin);
-      resposta = "Porcentagens: Norte, Sul, Leste e Oeste.";
+      resposta = "Porcentagem Norte: " + String((ldrNorteValue * 100) / 4095) + "%\n" +
+           "Porcentagem Sul: " + String((ldrSulValue * 100) / 4095) + "%\n" +
+           "Porcentagem Leste: " + String((ldrLesteValue * 100) / 4095) + "%\n" +
+           "Porcentagem Oeste: " + String((ldrOesteValue * 100) / 4095) + "%";
+
     } else if (text == "/ajuda") {
-      resposta = "Comandos disponíveis: /start, /informacao, /status, etc.";
+      resposta = "Comandos disponíveis:\n"
+           "/start - Iniciar o bot\n"
+           "/informacao - Informações sobre o bot\n"
+           "/porcentagem_norte - Percentagem Norte\n"
+           "/porcentagem_sul - Percentagem Sul\n"
+           "/porcentagem_leste - Percentagem Leste\n"
+           "/porcentagem_oeste - Percentagem Oeste\n"
+           "/ambos - Norte, Sul, Leste e Oeste\n"
+           "/ajuda - Lista de comandos";
+
     } else {
       resposta = "Comando não reconhecido.";
     }
 
-    bot.sendMessage(chat_id, resposta, ""); // Envia a resposta pelo bot
+    bot.sendMessage(chat_id, resposta, ""); // Sends the response via the bot
   }
 }
 
 void loop() {
-  // Leitura dos valores dos LDRs e controle dos servos
-  int ldrNorteValue = analogRead(ldrNortePin); // Lê o LDR Norte
-  int ldrSulValue = analogRead(ldrSulPin);     // Lê o LDR Sul
-  int ldrLesteValue = analogRead(ldrLestePin); // Lê o LDR Leste
-  int ldrOesteValue = analogRead(ldrOestePin); // Lê o LDR Oeste
+  // Reads the values from the LDRs and controls the servos
+  int ldrNorteValue = analogRead(ldrNortePin); // Reads the North LDR
+  int ldrSulValue = analogRead(ldrSulPin);     // Reads the South LDR
+  int ldrLesteValue = analogRead(ldrLestePin); // Reads the East LDR
+  int ldrOesteValue = analogRead(ldrOestePin); // Reads the West LDR
 
-  // Controle do servo com base nos valores dos LDRs
+  // Controls the North-South servo based on LDR values
   if (ldrNorteValue > limiar && ldrNorteValue > ldrSulValue) {
     Serial.println("Luz detectada no Norte");
-    moverServoLento(servoNS, posicaoAtualNS, 40); // Posição para norte
+    moverServoLento(servoNS, posicaoAtualNS, 40); // Position for north
   } else if (ldrSulValue > limiar && ldrSulValue > ldrNorteValue) {
     Serial.println("Luz detectada no Sul");
-    moverServoLento(servoNS, posicaoAtualNS, 180); // Posição para sul
+    moverServoLento(servoNS, posicaoAtualNS, 180); // Position for south
   } else if (ldrNorteValue < neutrolimiar && ldrSulValue < neutrolimiar) {
     Serial.println("Luz insuficiente - posição neutra");
-    moverServoLento(servoNS, posicaoAtualNS, 90); // Posição neutra
+    moverServoLento(servoNS, posicaoAtualNS, 90); // Neutral position for NS
   }
 
-  // Controle do servo Leste-Oeste
+  // Controls the East-West servo based on LDR values
   if (ldrLesteValue > limiar && ldrLesteValue > ldrOesteValue) {
-    moverServoLento(servoLO, posicaoAtualLO, 0); // Posição leste
+    Serial.println("Luz detectada no Leste");
+    moverServoLento(servoLO, posicaoAtualLO, 0); // Position for east
   } else if (ldrOesteValue > limiar && ldrOesteValue > ldrLesteValue) {
-    moverServoLento(servoLO, posicaoAtualLO, 180); // Posição oeste
-  } else {
-    moverServoLento(servoLO, posicaoAtualLO, 90); // Posição neutra
+    Serial.println("Luz detectada no Oeste");
+    moverServoLento(servoLO, posicaoAtualLO, 180); // Position for west
+  } else if (ldrLesteValue < neutrolimiar && ldrOesteValue < neutrolimiar) {
+    Serial.println("Luz insuficiente - posição neutra");
+    moverServoLento(servoLO, posicaoAtualLO, 90); // Neutral position for LO
   }
 
-  // Atualização do Telegram em intervalos
-  if (millis() > bot_lasttime + botRequestDelay) {
-    int numNewMessages = bot.getUpdates(bot.last_message_received + 1); // Verifica novas mensagens
-    while(numNewMessages) {          // Processa as mensagens
-      handleNewMessages(numNewMessages);
-      numNewMessages = bot.getUpdates(bot.last_message_received + 1);
+  // Handles any new messages from Telegram
+  if (millis() - bot_lasttime > botRequestDelay) {
+    int numNewMessages = bot.getUpdates(bot_lasttime); // Gets new messages from Telegram
+    if (numNewMessages) {
+      handleNewMessages(numNewMessages); // Process the new messages
+      bot_lasttime = millis(); // Updates the last time for the bot
     }
-    bot_lasttime = millis();        // Atualiza o tempo da última verificação
   }
-
-  delay(500); // Atraso para estabilidade
 }
-
