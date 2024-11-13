@@ -1,82 +1,82 @@
-#include <ESP32Servo.h>        // Includes the library for controlling servos on the ESP32
-#include <Arduino.h>           // Includes the main Arduino library for basic functionalities
-#include <WiFi.h>              // Includes the library for Wi-Fi control
-#include <UniversalTelegramBot.h> // Includes the library for communication with Telegram
-#include <WiFiClientSecure.h>  // Includes the library for secure Wi-Fi connections
+#include <ESP32Servo.h>        // Inclui a biblioteca para controle dos servos no ESP32
+#include <Arduino.h>           // Inclui a biblioteca principal do Arduino para funcionalidades básicas
+#include <WiFi.h>              // Inclui a biblioteca para controle do Wi-Fi
+#include <UniversalTelegramBot.h> // Inclui a biblioteca para comunicação com o Telegram
+#include <WiFiClientSecure.h>  // Inclui a biblioteca para conexões Wi-Fi seguras
 
-// Wi-Fi Data
-const char* ssid = "Livia";    // Defines the name of the Wi-Fi network (SSID)
-const char* password = "Flamengo2019"; // Defines the password for the Wi-Fi network
+// Dados do Wi-Fi
+const char* ssid = " ";    // Define o nome da rede Wi-Fi (SSID)
+const char* password = " "; // Define a senha da rede Wi-Fi
 
-// Bot Data
-const char* telegramToken = "7611180026:AAH4S1qSRjmUgW4i4qF01-LW7ftWeAfyDfo"; // Telegram bot token
+// Dados do Bot
+const char* telegramToken = " "; // Token do bot do Telegram
 
-const int ldrNortePin = 34;   // Defines the analog pin for the North LDR
-const int ldrSulPin = 35;     // Defines the analog pin for the South LDR
-const int ldrLestePin = 32;   // Defines the analog pin for the East LDR
-const int ldrOestePin = 33;   // Defines the analog pin for the West LDR
-const int limiar = 1000;   // Minimum value to detect sufficient light
-const int neutrolimiar = 500; // Value for the neutral position
+const int ldrNortePin = 34;   // Define o pino analógico para o LDR Norte
+const int ldrSulPin = 35;     // Define o pino analógico para o LDR Sul
+const int ldrLestePin = 32;   // Define o pino analógico para o LDR Leste
+const int ldrOestePin = 33;   // Define o pino analógico para o LDR Oeste
+const int limiar = 1000;      // Valor mínimo para detectar luz suficiente
+const int neutrolimiar = 500; // Valor para a posição neutra
 
-Servo servoNS;                // Creates the North-South servo object
-Servo servoLO;                // Creates the East-West servo object
+Servo servoNS;                // Cria o objeto para o servo Norte-Sul
+Servo servoLO;                // Cria o objeto para o servo Leste-Oeste
 
-int posicaoAtualNS = 90;      // Initial position for the North-South servo
-int posicaoAtualLO = 90;      // Initial position for the East-West servo
+int posicaoAtualNS = 90;      // Posição inicial do servo Norte-Sul
+int posicaoAtualLO = 90;      // Posição inicial do servo Leste-Oeste
 
-// Telegram Configuration
-WiFiClientSecure client;      // Creates the secure Wi-Fi client
-UniversalTelegramBot bot(telegramToken, client); // Initializes the bot with the token and client
-unsigned long bot_lasttime = 0; // Variable to store the last update time of the bot
-const int botRequestDelay = 1000;  // Delay between bot requests (in milliseconds)
+// Configuração do Telegram
+WiFiClientSecure client;      // Cria o cliente Wi-Fi seguro
+UniversalTelegramBot bot(telegramToken, client); // Inicializa o bot com o token e cliente
+unsigned long bot_lasttime = 0; // Variável para armazenar o último horário de atualização do bot
+const int botRequestDelay = 1000;  // Delay entre as requisições do bot (em milissegundos)
 
 void setup() {
-  Serial.begin(9600);          // Starts serial communication at 9600 baud rate
+  Serial.begin(9600);          // Inicia a comunicação serial a 9600 baud
 
-  // Wi-Fi Configuration
-  WiFi.begin(ssid, password);  // Connects to the Wi-Fi with the defined SSID and password
-  while (WiFi.status() != WL_CONNECTED) { // Wait until connected
+  // Configuração do Wi-Fi
+  WiFi.begin(ssid, password);  // Conecta-se ao Wi-Fi com o SSID e a senha definidos
+  while (WiFi.status() != WL_CONNECTED) { // Aguarda até a conexão ser estabelecida
     delay(500);
-    Serial.print(".");         // Prints "." while trying to connect
+    Serial.print(".");         // Imprime "." enquanto tenta conectar
   }
-  Serial.println("Conectado ao WiFi"); // Informs that the connection is established
+  Serial.println("Conectado ao WiFi"); // Informa que a conexão foi estabelecida
 
-  // Configures SSL certificate check bypass
-  client.setInsecure();        // Disables certificate verification for SSL connections
+  // Configuração do SSL
+  client.setInsecure();        // Desativa a verificação do certificado para conexões SSL
 
-  // Servo Configuration
-  servoNS.attach(14);          // Connects the North-South servo to GPIO14
-  servoLO.attach(12);          // Connects the East-West servo to GPIO12
+  // Configuração dos servos
+  servoNS.attach(14);          // Conecta o servo Norte-Sul no pino GPIO14
+  servoLO.attach(12);          // Conecta o servo Leste-Oeste no pino GPIO12
 
-  // Sets initial positions of the servos
+  // Define as posições iniciais dos servos
   servoNS.write(posicaoAtualNS);  
   servoLO.write(posicaoAtualLO);
-  delay(3000);                 // Waits 3 seconds for stabilization
+  delay(3000);                 // Aguarda 3 segundos para estabilização
 }
 
-// Function to move the servo slowly to the final position
+// Função para mover o servo lentamente até a posição final
 void moverServoLento(Servo &servo, int &posicaoAtual, int posicaoFinal) {
-  if (posicaoAtual != posicaoFinal) { // Checks if the final position is different from the current one
-    if (posicaoAtual < posicaoFinal) { // For increasing movement
+  if (posicaoAtual != posicaoFinal) { // Verifica se a posição final é diferente da atual
+    if (posicaoAtual < posicaoFinal) { // Caso o movimento seja para aumentar a posição
       for (int pos = posicaoAtual; pos <= posicaoFinal; pos++) {
-        servo.write(pos);        // Adjusts the servo to the position
-        delay(20);               // Waits 20 ms between movements
+        servo.write(pos);        // Ajusta o servo para a posição
+        delay(20);               // Aguarda 20 ms entre os movimentos
       }
-    } else {                     // For decreasing movement
+    } else {                     // Caso o movimento seja para diminuir a posição
       for (int pos = posicaoAtual; pos >= posicaoFinal; pos--) {
         servo.write(pos);
         delay(20);  
       }
     }
-    posicaoAtual = posicaoFinal; // Updates the current position
+    posicaoAtual = posicaoFinal; // Atualiza a posição atual
   }
 }
 
-// Function to handle new messages
+// Função para lidar com as novas mensagens
 void handleNewMessages(int numNewMessages) {
-  for (int i = 0; i < numNewMessages; i++) { // Loops through all new received messages
-    String chat_id = String(bot.messages[i].chat_id); // Stores the chat ID
-    String text = bot.messages[i].text; // Stores the message text
+  for (int i = 0; i < numNewMessages; i++) { // Percorre todas as novas mensagens recebidas
+    String chat_id = String(bot.messages[i].chat_id); // Armazena o ID do chat
+    String text = bot.messages[i].text; // Armazena o texto da mensagem
 
     String resposta;
     if (text == "/start") {
@@ -123,47 +123,47 @@ void handleNewMessages(int numNewMessages) {
       resposta = "Comando não reconhecido.";
     }
 
-    bot.sendMessage(chat_id, resposta, ""); // Sends the response via the bot
+    bot.sendMessage(chat_id, resposta, ""); // Envia a resposta via bot
   }
 }
 
 void loop() {
-  // Reads the values from the LDRs and controls the servos
-  int ldrNorteValue = analogRead(ldrNortePin); // Reads the North LDR
-  int ldrSulValue = analogRead(ldrSulPin);     // Reads the South LDR
-  int ldrLesteValue = analogRead(ldrLestePin); // Reads the East LDR
-  int ldrOesteValue = analogRead(ldrOestePin); // Reads the West LDR
+  // Lê os valores dos LDRs e controla os servos
+  int ldrNorteValue = analogRead(ldrNortePin); // Lê o LDR Norte
+  int ldrSulValue = analogRead(ldrSulPin);     // Lê o LDR Sul
+  int ldrLesteValue = analogRead(ldrLestePin); // Lê o LDR Leste
+  int ldrOesteValue = analogRead(ldrOestePin); // Lê o LDR Oeste
 
-  // Controls the North-South servo based on LDR values
+  // Controla o servo Norte-Sul com base nos valores dos LDRs
   if (ldrNorteValue > limiar && ldrNorteValue > ldrSulValue) {
     Serial.println("Luz detectada no Norte");
-    moverServoLento(servoNS, posicaoAtualNS, 40); // Position for north
+    moverServoLento(servoNS, posicaoAtualNS, 0); // Posição para o norte
   } else if (ldrSulValue > limiar && ldrSulValue > ldrNorteValue) {
     Serial.println("Luz detectada no Sul");
-    moverServoLento(servoNS, posicaoAtualNS, 180); // Position for south
+    moverServoLento(servoNS, posicaoAtualNS, 180); // Posição para o sul
   } else if (ldrNorteValue < neutrolimiar && ldrSulValue < neutrolimiar) {
     Serial.println("Luz insuficiente - posição neutra");
-    moverServoLento(servoNS, posicaoAtualNS, 90); // Neutral position for NS
+    moverServoLento(servoNS, posicaoAtualNS, 90); // Posição neutra para o NS
   }
 
-  // Controls the East-West servo based on LDR values
+  // Controla o servo Leste-Oeste com base nos valores dos LDRs
   if (ldrLesteValue > limiar && ldrLesteValue > ldrOesteValue) {
     Serial.println("Luz detectada no Leste");
-    moverServoLento(servoLO, posicaoAtualLO, 0); // Position for east
+    moverServoLento(servoLO, posicaoAtualLO, 0); // Posição para o leste
   } else if (ldrOesteValue > limiar && ldrOesteValue > ldrLesteValue) {
     Serial.println("Luz detectada no Oeste");
-    moverServoLento(servoLO, posicaoAtualLO, 180); // Position for west
+    moverServoLento(servoLO, posicaoAtualLO, 180); // Posição para o oeste
   } else if (ldrLesteValue < neutrolimiar && ldrOesteValue < neutrolimiar) {
     Serial.println("Luz insuficiente - posição neutra");
-    moverServoLento(servoLO, posicaoAtualLO, 90); // Neutral position for LO
+    moverServoLento(servoLO, posicaoAtualLO, 90); // Posição neutra para o LO
   }
 
-  // Handles any new messages from Telegram
+  // Processa qualquer nova mensagem do Telegram
   if (millis() - bot_lasttime > botRequestDelay) {
-    int numNewMessages = bot.getUpdates(bot_lasttime); // Gets new messages from Telegram
+    int numNewMessages = bot.getUpdates(bot_lasttime); // Obtém novas mensagens do Telegram
     if (numNewMessages) {
-      handleNewMessages(numNewMessages); // Process the new messages
-      bot_lasttime = millis(); // Updates the last time for the bot
+      handleNewMessages(numNewMessages); // Processa as novas mensagens
+      bot_lasttime = millis(); // Atualiza o horário da última verificação
     }
   }
 }
