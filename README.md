@@ -1,4 +1,4 @@
-<h1 align="center"> TCC - Automação Residencial Sustentável </h1>
+<h1 align="center"> TCC - Desenvolvimento de um protótipo de rastreador solar via microcontrolador </h1>
 
 <a id="Sumário"></a>
 
